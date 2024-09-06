@@ -1,1 +1,14 @@
-<app-nx-welcome></app-nx-welcome> <router-outlet></router-outlet>
+<form
+  method="POST"
+  enctype="multipart/form-data"
+  action="http://localhost:8080/translate/analyse"
+>
+  <input
+    #PicturesInput
+    type="file"
+    id="fileInput"
+    (change)="onAddText($event.target)"
+    accept=".txt"
+    multiple
+  />
+</form>

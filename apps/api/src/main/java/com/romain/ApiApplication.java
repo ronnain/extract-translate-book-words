@@ -1,4 +1,4 @@
-package com.romain.java;
+package com.romain;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

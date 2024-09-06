@@ -1,4 +1,4 @@
-package com.romain.java;
+package com.romain;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
