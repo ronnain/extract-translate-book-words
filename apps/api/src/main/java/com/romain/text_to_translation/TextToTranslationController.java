@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.websocket.Decoder.Text;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/translate")
@@ -25,27 +26,39 @@ public class TextToTranslationController {
     @Autowired
     private TextAnalysisService textAnalysisService;
 
-    @GetMapping
-    public String translateText() {
-        return textAnalysisService.analyzeText("Hello, World! Hello2, World2! Hello, World!Hello, World!").toString();
+    // @GetMapping
+    // public String translateText() {
+    //     return textAnalysisService.analyzeText("Hello, World! Hello2, World2! Hello, World!Hello, World!").toString();
+    // }
+
+    // @PostMapping(value="/analyze", produces="text/csv")
+    // public void analyzeText(@RequestParam("text") MultipartFile file, HttpServletResponse response) throws IOException {
+    //     String content = new String(file.getBytes(), StandardCharsets.UTF_8);
+    //     String csvResult = textAnalysisService.analyzeText(content);
+
+    //     response.setContentType("text/csv");
+    //     response.setCharacterEncoding("UTF-8");
+    //     response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=result.csv");
+
+    //     response.getWriter().write(csvResult);
+    //     response.flushBuffer();
+    // }
+
+
+    @GetMapping(value="/words")
+    public Mono<String> wordsToLearn() {
+        return textAnalysisService.createThreadAndRunToGetWordsToLearn();
     }
 
-    @PostMapping(value="/analyze", produces="text/csv")
-    public void analyzeText(@RequestParam("text") MultipartFile file, HttpServletResponse response) throws IOException {
-        String content = new String(file.getBytes(), StandardCharsets.UTF_8);
-        String csvResult = textAnalysisService.analyzeText(content);
-
-        response.setContentType("text/csv");
-        response.setCharacterEncoding("UTF-8");
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"result.csv\"");
-
-        response.getWriter().write(csvResult);
-        response.flushBuffer();
+    @GetMapping(value="/chapter-resume")
+    public Mono<String> test() {
+        // TODO
+        return textAnalysisService.createThreadAndRunToGetWordsToLearn();
     }
 
+    @GetMapping(value="/image")
+    public String chapterResume() {
 
-    @GetMapping(value="/test")
-    public String test() {
-        return textAnalysisService.callExternalApi();
+        return textAnalysisService.createImage();
     }
 }

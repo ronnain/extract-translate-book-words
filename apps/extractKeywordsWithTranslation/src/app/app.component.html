@@ -12,3 +12,12 @@
     multiple
   />
 </form>
+
+<button (click)="generateImage()">generateImage</button>
+
+<button (click)="userFetchWords$.next()">Get words</button>
+
+<div>
+  Words:
+  <pre>{{ wordsToLearn$ | async | json }}</pre>
+</div>
